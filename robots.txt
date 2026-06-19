@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://oyamaringpa.github.io/mcn-aiyouxi-com-cn/sitemap.xml
