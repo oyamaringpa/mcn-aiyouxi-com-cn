@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PG模拟器 · 产品式介绍页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: linear-gradient(145deg, #fbe9d7 0%, #fbd6b0 45%, #fbcea1 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+      color: #3a2e26;
+    }
+
+    .card {
+      max-width: 980px;
+      width: 100%;
+      background: #fffffffa;
+      backdrop-filter: blur(2px);
+      border-radius: 44px;
+      box-shadow: 0 20px 40px -12px rgba(120, 70, 30, 0.28), 0 8px 20px rgba(0,0,0,0.03);
+      padding: 2.8rem 2.6rem;
+      transition: box-shadow 0.25s ease;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 2rem 1.4rem;
+        border-radius: 32px;
+      }
+    }
+
+    /* 标题区 —— 暖色渐变点缀 */
+    .hero-title {
+      font-size: 2.4rem;
+      font-weight: 560;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #bb6b3a, #8f4e2b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.3rem;
+      line-height: 1.2;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: #7b6250;
+      margin-bottom: 1.8rem;
+      border-left: 4px solid #e5b693;
+      padding-left: 1rem;
+      background: #f4ede6;
+      border-radius: 0 20px 20px 0;
+      display: inline-block;
+      padding: 0.4rem 1.2rem 0.4rem 1rem;
+      font-weight: 440;
+    }
+
+    /* 正文排版 */
+    .intro p {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin: 2rem 0 1.8rem;
+    }
+
+    @media (max-width: 540px) {
+      .highlight-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature-item {
+      background: #faf3ec;
+      border-radius: 48px 18px 48px 18px;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid #f5e1d0;
+      transition: all 0.2s;
+    }
+
+    .feature-item:hover {
+      background: #f8ede0;
+      border-color: #dbb99a;
+      box-shadow: 0 6px 12px -8px #b58b6b40;
+    }
+
+    .feature-item strong {
+      color: #8f4e2b;
+      display: block;
+      font-weight: 580;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .feature-item span {
+      color: #3f332b;
+      font-size: 0.95rem;
+    }
+
+    .tips-usage {
+      background: #f9f1e8;
+      padding: 1.6rem 1.8rem;
+      border-radius: 40px 8px 40px 8px;
+      margin: 2rem 0 1.5rem;
+      border-left: 6px solid #c48965;
+    }
+
+    .tips-usage h3 {
+      font-weight: 550;
+      color: #7d4d2b;
+      margin-bottom: 0.6rem;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tips-usage ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.2rem;
+    }
+
+    .tips-usage li {
+      position: relative;
+      padding-left: 1.2rem;
+      font-size: 0.96rem;
+      color: #403024;
+      line-height: 1.5;
+    }
+
+    .tips-usage li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: #b57a58;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .faq-mini {
+      margin: 2rem 0 1.2rem;
+      border-top: 2px dashed #eedbcb;
+      padding-top: 1.6rem;
+    }
+
+    .faq-mini details {
+      margin-bottom: 0.75rem;
+      background: #faf1e8;
+      border-radius: 40px 8px 40px 8px;
+      padding: 0.4rem 1.2rem 0.4rem 1.6rem;
+      border: 1px solid #ebd4c2;
+      transition: background 0.15s;
+    }
+
+    .faq-mini details[open] {
+      background: #f6e7d9;
+      padding-bottom: 0.9rem;
+    }
+
+    .faq-mini summary {
+      font-weight: 510;
+      color: #663f28;
+      cursor: pointer;
+      padding: 0.6rem 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .faq-mini summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-mini summary::before {
+      content: "▸";
+      color: #b57a58;
+      font-size: 1.1rem;
+      margin-right: 8px;
+      transition: transform 0.2s;
+    }
+
+    .faq-mini details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .faq-mini p {
+      margin: 0.2rem 0 0 1.8rem;
+      font-size: 0.95rem;
+      color: #4a3b30;
+    }
+
+    .link-sentence {
+      background: #fcf7f2;
+      padding: 1.4rem 1.6rem;
+      border-radius: 60px 12px 60px 12px;
+      margin: 1.8rem 0 0.8rem;
+      border: 1px solid #e2ccbb;
+      font-size: 1.05rem;
+      text-align: center;
+    }
+
+    .link-sentence a {
+      display: inline-block;
+      background: #c48965;
+      color: white;
+      text-decoration: none;
+      font-weight: 560;
+      padding: 0.2rem 1.4rem;
+      border-radius: 60px;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.02em;
+      margin: 0 4px;
+      font-size: 1.08rem;
+      box-shadow: 0 4px 10px -4px #a06d4b80;
+    }
+
+    .link-sentence a:hover {
+      background: #a86f4b;
+      transform: scale(0.97);
+      box-shadow: 0 2px 6px -2px #7b593d;
+    }
+
+    .footnote {
+      margin-top: 2.2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eedbcb;
+      font-size: 0.85rem;
+      color: #776454;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.4rem;
+    }
+
+    .footnote span {
+      background: #f2e5d9;
+      padding: 0.1rem 1rem;
+      border-radius: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <div class="hero-title">PG模拟器 · 日常与探索</div>
+    <div class="hero-sub">产品式说明 · 轻量而完整的视角</div>
+
+    <div class="intro">
+      <p>
+        提到 <strong>PG模拟器</strong>，很多人第一反应是“一个工具，能跑一些经典的程序环境”。其实它的意义更接近一种轻量的技术容器——不需要复杂配置，就能在本地模拟特定运行逻辑。对于喜欢折腾旧软件、测试脚本、或者单纯想体验不同系统行为的朋友来说，它就是一个很趁手的沙盒。
+      </p>
+      <p>
+        无论你是开发者、爱好者，还是偶尔需要复现某个环境的学生，PG模拟器都提供了一种“搭积木”式的自由：选一个配置，启动，然后观察它如何运转。没有侵入感，也不会打扰你日常的使用习惯。
+      </p>
+    </div>
+
+    <!-- 亮点卡片 -->
+    <div class="highlight-grid">
+      <div class="feature-item">
+        <strong>🎯 轻量启动</strong>
+        <span>无需安装庞大虚拟机，一个可执行文件就能跑起来。对老旧设备也比较友好，CPU 和内存占用控制得很克制。</span>
+      </div>
+      <div class="feature-item">
+        <strong>🧩 配置灵活</strong>
+        <span>支持多种内核参数、硬件抽象调整，甚至可以一键切换不同模拟模式。适合反复测试与版本对比。</span>
+      </div>
+      <div class="feature-item">
+        <strong>🔄 快照与恢复</strong>
+        <span>遇到奇怪的问题？随时保存当前状态，再回滚到之前的节点。试错成本几乎为零。</span>
+      </div>
+      <div class="feature-item">
+        <strong>📦 社区扩展</strong>
+        <span>有爱好者制作了额外配置包、界面主题，以及一些常用环境的预设。不需要从零开始折腾。</span>
+      </div>
+    </div>
+
+    <!-- 使用建议区块 -->
+    <div class="tips-usage">
+      <h3>✨ 一些使用建议</h3>
+      <ul>
+        <li>先从默认配置开始，熟悉界面布局和常用快捷键</li>
+        <li>需要运行较老的程序时，记得调整兼容层设定</li>
+        <li>善用日志输出，很多异常在 log 里就能定位</li>
+        <li>如果卡顿，可以降低帧率或关闭视觉增强选项</li>
+        <li>备份你的快照，尤其是尝试不确定的设置之前</li>
+      </ul>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+      <details>
+        <summary>PG模拟器适合完全没经验的新手吗？</summary>
+        <p>基本操作并不复杂，官方文档也提供了图文指引。只要会双击运行、认识基本菜单，就能在十几分钟内上手。遇到不懂的术语，可以先跳过，不影响核心功能。</p>
+      </details>
+      <details>
+        <summary>模拟环境会不会影响我电脑里的其他软件？</summary>
+        <p>模拟器运行在独立的虚拟沙盒里，默认不会访问宿主机文件系统（除非你手动映射目录）。所以基本不会产生干扰，安全性也更有保障。</p>
+      </details>
+      <details>
+        <summary>想要更流畅的体验，需要怎样的电脑配置？</summary>
+        <p>大部分场景下，近五年内的处理器、4GB 以上内存就能流畅运行。如果模拟较复杂的环境，建议 8GB 内存和固态硬盘。</p>
+      </details>
+    </div>
+
+    <!-- 嵌有链接的句子 —— 关键 a 标签 -->
+    <div class="link-sentence">
+      如果你对轻量模拟环境感兴趣，不妨从 <a href="https://m-site-pg.com">PG模拟器</a> 开始，亲自体验一下它的简洁与可塑性。
+    </div>
+
+    <!-- 克制说明 -->
+    <div class="footnote">
+      <span>本页为产品介绍 · 不提供下载或诱导访问</span>
+      <span>实际表现取决于具体版本与系统环境</span>
+    </div>
+
+  </div>
+</body>
+</html>
